@@ -5,6 +5,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -35,7 +37,10 @@ fun Onboarding(navController: NavController) {
         "user_prefs",
         android.content.Context.MODE_PRIVATE
     )
-    Column {
+    Column  (
+        modifier = Modifier.fillMaxSize()
+            .padding(bottom = 20.dp)
+    ) {
         Image(
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "Logo",
@@ -94,6 +99,8 @@ fun Onboarding(navController: NavController) {
             borderColor = Gray
         }
 
+        Spacer(modifier = Modifier.weight(1f))
+
         Button(
             onClick = {
                 if (isAllFieldsValid(firstName, lastName, email)) {
@@ -108,7 +115,11 @@ fun Onboarding(navController: NavController) {
                         "Registration successful",
                         Toast.LENGTH_SHORT
                     ).show()
-                    navController.navigate(Home.route)
+                    navController.navigate(Home.route){
+                        popUpTo(Home.route) {
+                            inclusive = true
+                        }
+                    }
                 } else {
                     //toast registration failed
                     Toast.makeText(
@@ -153,8 +164,8 @@ fun isAllFieldsValid(
 }
 
 @Composable
-fun Input(name: String, placeholderName: String, value: String, setValue: (String) -> Unit) {
-    Column {
+fun Input(name: String, placeholderName: String, value: String, setValue: (String) -> Unit, readOnly: Boolean = false) {
+    Column  {
         Text(
             text = name,
             modifier = Modifier
@@ -165,8 +176,9 @@ fun Input(name: String, placeholderName: String, value: String, setValue: (Strin
         )
         TextField(
             value = value,
+            readOnly = readOnly,
             onValueChange = {
-                setValue(it)
+                setValue(it.replace(" ", ""))
             },
             placeholder = {
                 Text(
