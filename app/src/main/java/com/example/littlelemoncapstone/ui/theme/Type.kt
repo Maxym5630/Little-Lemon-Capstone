@@ -6,29 +6,54 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-// Set of Material typography styles to start with
+import androidx.compose.ui.text.font.Font
+import com.example.littlelemoncapstone.R
+
+// Подключаем шрифты
+val MarkaziText = FontFamily(Font(R.font.markazi_text_regular))
+val Karla = FontFamily(Font(R.font.karla_regular))
+
+// Определяем стили
 val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
+    displayLarge = TextStyle( // Display Title
+        fontFamily = MarkaziText,
+        fontWeight = FontWeight.Medium,
+        fontSize = 64.sp
+    ),
+    displayMedium = TextStyle( // Sub title
+        fontFamily = MarkaziText,
+        fontWeight = FontWeight.Normal,
+        fontSize = 40.sp
+    ),
+    titleLarge = TextStyle( // Lead text (CTA)
+        fontFamily = Karla,
+        fontWeight = FontWeight.Medium,
+        fontSize = 18.sp
+    ),
+    titleMedium = TextStyle( // Section title (UPPERCASE)
+        fontFamily = Karla,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 20.sp
+    ),
+    titleSmall = TextStyle( // Categories
+        fontFamily = Karla,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 16.sp
+    ),
+    bodyLarge = TextStyle( // Card Title
+        fontFamily = Karla,
+        fontWeight = FontWeight.Bold,
+        fontSize = 18.sp
+    ),
+    bodyMedium = TextStyle( // Paragraph text
+        fontFamily = Karla,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        lineHeight = 24.sp
     ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
+    labelLarge = TextStyle( // Highlight text (e.g. price)
+        fontFamily = Karla,
         fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
+        fontSize = 16.sp
     )
-    */
 )
