@@ -5,11 +5,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme.typography
@@ -28,7 +30,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.littlelemoncapstone.ui.theme.*
+import com.example.littlelemoncapstone.ui.theme.Gray
+import com.example.littlelemoncapstone.ui.theme.White
+import com.example.littlelemoncapstone.ui.theme.main_black
+import com.example.littlelemoncapstone.ui.theme.main_white
+import com.example.littlelemoncapstone.ui.theme.primary_one
+import com.example.littlelemoncapstone.ui.theme.primary_two
 
 
 @Composable
@@ -37,18 +44,26 @@ fun Onboarding(navController: NavController) {
         "user_prefs",
         android.content.Context.MODE_PRIVATE
     )
-    Column  (
-        modifier = Modifier.fillMaxSize()
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
             .padding(bottom = 20.dp)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "Logo",
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp)
-                .padding(top = 40.dp, bottom = 10.dp)
-        )
+                .padding(top = 40.dp, bottom = 40.dp),
+            horizontalArrangement = androidx.compose.foundation.layout.Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Logo",
+                modifier = Modifier
+                    .height(56.dp)
+                    .width((185 / 40 * 56).dp)
+            )
+        }
+
         Text(
             text = "Let's get to know you!",
             modifier = Modifier
@@ -115,7 +130,7 @@ fun Onboarding(navController: NavController) {
                         "Registration successful",
                         Toast.LENGTH_SHORT
                     ).show()
-                    navController.navigate(Home.route){
+                    navController.navigate(Home.route) {
                         popUpTo(Home.route) {
                             inclusive = true
                         }
@@ -129,7 +144,8 @@ fun Onboarding(navController: NavController) {
                     ).show()
                 }
             },
-            modifier = Modifier.padding(horizontal = 20.dp, vertical = 40.dp)
+            modifier = Modifier
+                .padding(horizontal = 20.dp, vertical = 40.dp)
                 .fillMaxWidth()
                 .border(1.dp, borderColor, Shapes().small),
             colors = ButtonDefaults.buttonColors(containerColor = backgroundColor),
@@ -164,8 +180,14 @@ fun isAllFieldsValid(
 }
 
 @Composable
-fun Input(name: String, placeholderName: String, value: String, setValue: (String) -> Unit, readOnly: Boolean = false) {
-    Column  {
+fun Input(
+    name: String,
+    placeholderName: String,
+    value: String,
+    setValue: (String) -> Unit,
+    readOnly: Boolean = false
+) {
+    Column {
         Text(
             text = name,
             modifier = Modifier

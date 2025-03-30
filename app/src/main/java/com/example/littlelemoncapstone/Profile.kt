@@ -1,14 +1,16 @@
 package com.example.littlelemoncapstone
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme.typography
@@ -22,8 +24,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.littlelemoncapstone.ui.theme.main_black
-import com.example.littlelemoncapstone.ui.theme.main_white
-import com.example.littlelemoncapstone.ui.theme.primary_one
 import com.example.littlelemoncapstone.ui.theme.primary_two
 
 @Composable
@@ -35,18 +35,26 @@ fun Profile(navController: NavController) {
     val firstName = sharedPreferences.getString("first_name", "").toString()
     val lastName = sharedPreferences.getString("last_name", "").toString()
     val email = sharedPreferences.getString("email", "").toString()
-    Column (
-        modifier = Modifier.fillMaxSize()
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
             .padding(bottom = 20.dp)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "Logo",
+        Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 40.dp, bottom = 100.dp)
-                .height(50.dp)
-        )
+                .padding(top = 40.dp, bottom = 168.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Logo",
+                modifier = Modifier
+                    .height(56.dp)
+                    .width((185 / 40 * 56).dp)
+            )
+        }
+
 
         Text(
             text = "Personal information",
@@ -62,21 +70,21 @@ fun Profile(navController: NavController) {
             name = "First Name",
             placeholderName = "Enter your first name",
             value = firstName,
-            setValue = {  },
+            setValue = { },
             readOnly = true
         )
         Input(
             name = "Last Name",
             placeholderName = "Enter your last name",
             value = lastName,
-            setValue = {  },
+            setValue = { },
             readOnly = true
         )
         Input(
             name = "Email",
             placeholderName = "Enter your email",
             value = email,
-            setValue = {  },
+            setValue = { },
             readOnly = true
         )
 
@@ -94,7 +102,8 @@ fun Profile(navController: NavController) {
                     }
                 }
             },
-            modifier = Modifier.padding(horizontal = 20.dp, vertical = 40.dp)
+            modifier = Modifier
+                .padding(horizontal = 20.dp, vertical = 40.dp)
                 .fillMaxWidth()
                 .border(1.dp, Color(0XFFd19630), Shapes().small),
             colors = ButtonDefaults.buttonColors(containerColor = primary_two),
